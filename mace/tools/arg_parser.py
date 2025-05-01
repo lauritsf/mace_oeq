@@ -673,6 +673,13 @@ def build_default_arg_parser() -> argparse.ArgumentParser:
         type=str2bool,
         default=False,
     )
+    # option for openEquivariance acceleration
+    parser.add_argument(
+        "--enable_oeq",
+        help="Enable openEquivariance (oeq) acceleration",
+        type=str2bool,
+        default=False,
+    )
     # options for using Weights and Biases for experiment tracking
     # to install see https://wandb.ai
     parser.add_argument(

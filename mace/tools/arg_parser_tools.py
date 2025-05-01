@@ -1,3 +1,4 @@
+import argparse
 import logging
 import os
 
@@ -118,5 +119,18 @@ def check_args(args):
                 )
             )
             args.swa = False
+
+    if hasattr(args, "enable_cueq") and hasattr(args, "enable_oeq"):
+        if args.enable_cueq and args.enable_oeq:
+            raise argparse.ArgumentError(
+                None,
+                "Cannot enable both --enable_cueq and --enable_oeq simultaneously. Choose only one acceleration backend.",
+            )
+        if args.enable_cueq:
+            log_messages.append(("cuEquivariance acceleration enabled.", logging.INFO))
+        elif args.enable_oeq:
+            log_messages.append(
+                ("OpenEquivariance acceleration enabled.", logging.INFO)
+            )
 
     return args, log_messages
